@@ -1,21 +1,23 @@
-import DeployButton from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import HeaderAuth from "@/components/header-auth";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import { GeistSans } from "geist/font/sans";
-import { ThemeProvider } from "next-themes";
-import Link from "next/link";
-import "./globals.css";
+import DeployButton from '@/components/deploy-button';
+import { EnvVarWarning } from '@/components/env-var-warning';
+import HeaderAuth from '@/components/header-auth';
+import { ThemeSwitcher } from '@/components/theme-switcher';
+import { hasEnvVars } from '@/utils/supabase/check-env-vars';
+import { GeistSans } from 'geist/font/sans';
+import { ThemeProvider } from 'next-themes';
+import Link from 'next/link';
+import './globals.css';
+import { SiteHeader } from '@/components/site-header';
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const defaultUrl =
+  process.env.VERCEL_URL ?
+    `https://${process.env.VERCEL_URL}`
+  : 'http://localhost:3000';
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: 'Next.js and Supabase Starter Kit',
+  description: 'The fastest way to build apps with Next.js and Supabase',
 };
 
 export default function RootLayout({
@@ -32,12 +34,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col items-center justify-center ">
-            <div className="max-w-prose flex-1 flex flex-col p-3">
-
-            {children}
-            </div>
-          </main>
+          <div className="relative flex min-h-screen flex-col">
+            <SiteHeader />
+            <main className="flex-1 mt-6">
+              <div className="container flex-1 items-start md:grid">
+                {children}
+              </div>
+            </main>
+          </div>
         </ThemeProvider>
       </body>
     </html>
