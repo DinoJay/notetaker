@@ -42,22 +42,19 @@ function DialogVaul({
 }: DialogVaulProps) {
   const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
 
+  const cls = 'flex-1 flex flex-col';
+
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange} {...props}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] h-[650px] flex flex-col">
           <DialogHeader>
             <DialogTitle className="text-xl">{title}</DialogTitle>
             <DialogDescription className="text-xl">
               {description}
             </DialogDescription>
           </DialogHeader>
-          {children}
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button className="w-full ">Start Exploring</Button>
-            </DialogClose>
-          </DialogFooter>
+          <div className={cls}>{children}</div>
         </DialogContent>
       </Dialog>
     );
@@ -65,17 +62,12 @@ function DialogVaul({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange} {...props}>
-      <DrawerContent>
+      <DrawerContent className="h-full flex flex-col">
         <DrawerHeader className="text-left">
           <DrawerTitle className="text-xl">{title}</DrawerTitle>
           <DrawerDescription className="text-xl">hey</DrawerDescription>
         </DrawerHeader>
-        {children}
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button className="w-full ">Start Exploring</Button>
-          </DrawerClose>
-        </DrawerFooter>
+        <div className={cls}>{children}</div>
       </DrawerContent>
     </Drawer>
   );
